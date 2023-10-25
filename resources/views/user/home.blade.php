@@ -68,27 +68,39 @@
         <div class="collapse navbar-collapse" id="navbarSupport">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home</a>
+              <a class="nav-link" href="">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="about.html">About Us</a>
+              <a class="nav-link" href="">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="doctors.html">Doctors</a>
+              <a class="nav-link" href="">Doctors</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="blog.html">News</a>
+              <a class="nav-link" href="">News</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="">Contact</a>
             </li>
            
             @if(Route::has('login'))
             @auth
+            <li class="nav-item">
 
-            <x-app-layout>
-              </x-app-layout>
+              <a href="{{ route('profile.show') }}">   {{ Auth::user()->name }}</a>
 
+              <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+    
+                  <input type="submit" value="Logout">
+                
+              </form>
+            </li>
+           
+
+            
+
+               
             @else
             
             <li class="nav-item">

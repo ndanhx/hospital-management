@@ -1,15 +1,15 @@
 <html>
 <head>
-    @include('admin.css');
+    @include('admin.doctor.css');
   </head>
   <body>
     <div class="container-scroller">
       
       <!-- partial:partials/_sidebar.html -->
-        @include('admin.sidebar');
+        @include('admin.doctor.sidebar');
       <!-- partial -->
       
-        @include('admin.navbar');
+        @include('admin.doctor.navbar');
 
         <div class="container-fluid page-body-wrapper">
             @if(session()->has('message'))
@@ -17,12 +17,13 @@
                     <button type="button" class="close" data-dismiss="alert">
                         X
                     </button>
-                    {[session()->get('message')]}
+                    {{session()->get('message')}}
                 </div>
             @endif
             <div class="container">
-                <form action="{{ url('upload_doctor') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="{{ url('upload-doctor') }}" method="POST" enctype="multipart/form-data">
+                    @csrf 
+                    @method('POST')
                     <div>
                         <div class="mt-4">
                             <x-label for="Doctor Name" value="{{ __('Doctor Name') }}" />
@@ -64,7 +65,7 @@
         </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    @include('admin.script');
+    @include('admin.doctor.script');
     <!-- End custom js for this page -->
   </body>
 </html>
