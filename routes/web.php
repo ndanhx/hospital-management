@@ -23,4 +23,5 @@ Route::get('/add-doctor', [AdminController::class, 'addview']);
 
 Route::post('/upload-doctor', [AdminController::class, 'upload']);
 
-Route::get('/view-doctor', [AdminController::class, 'index']);
+Route::get('/doctor', [AdminController::class, 'index']);
+

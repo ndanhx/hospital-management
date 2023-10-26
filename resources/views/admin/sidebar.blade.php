@@ -57,17 +57,10 @@
         <span class="nav-link">Navigation</span>
       </li>
       
-      <li class="nav-item menu-items">
-        <a class="nav-link" href="{{ url('add-doctor') }}">
-          <span class="menu-icon">
-            <i class="mdi mdi-file-document-box"></i>
-          </span>
-          <span class="menu-title">Add Doctors</span>
-        </a>
-      </li>
+      
 
       <li class="nav-item menu-items">
-        <a class="nav-link" href="{{ url('add-doctor') }}">
+        <a class="nav-link" href="{{ url('doctor') }}">
           <span class="menu-icon">
             <i class="mdi mdi-file-document-box"></i>
           </span>

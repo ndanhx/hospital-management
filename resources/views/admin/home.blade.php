@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    @include('admin.doctor.css');
+    @include('admin.css');
   </head>
   <body>
     <div class="container-scroller">
       
       <!-- partial:partials/_sidebar.html -->
-        @include('admin.doctor.sidebar');
+        @include('admin.sidebar');
       <!-- partial -->
       
-        @include('admin.doctor.navbar');
+        @include('admin.navbar');
 
         <!-- partial -->
-        @include('admin.doctor.body');
+        @include('admin.body');
     <!-- container-scroller -->
     <!-- plugins:js -->
-    @include('admin.doctor.script');
+    @include('admin.script');
     <!-- End custom js for this page -->
   </body>
 </html>

@@ -30,8 +30,8 @@ class AdminController extends Controller
 
     }
     public function index( ){
-        
-        return view('');
+        $listDoctor = Doctor::all();  
+        return view('admin.doctor.doctor', compact('listDoctor'));
     
     }
 }
