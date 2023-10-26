@@ -48,10 +48,10 @@
                                     </div>
                                     
                                     <div class="mt-4">
-                                        <x-label for="Phone" value="{{ __('Phone') }}" style="
+                                        <x-label for="Phone"  value="{{ __('Phone') }}" style="
                                         color: white;
                                     "/>
-                                        <x-input id="Phone" class="block mt-1" type="number" name="number" :value="old('number')" 
+                                        <x-input id="Phone" class="block mt-1" type="number" name="phone" :value="old('number')" 
                                         placeholder="Nhập số điện thoại" required autocomplete="Phone" style="color:black;"
                                         style="background-color: #333; color: white; border: 1px solid #555; padding: 0.5rem;"/>
                                     </div>
@@ -62,11 +62,10 @@
                                         <select id="Specialty" class="block mt-1" name="specialty" required 
                                         style="background-color: #333; color: white; border: 1px solid #555; padding: 0.5rem; border-radius: 7px;"
                                         >
-                                            <option>---Select---</option>
-                                            <option value="Skin">Skin</option>  
-                                            <option value="Heart">Heart</option>
-                                            <option value="Eye">Eye</option>
-                                            <option value="Nose">Nose</option>
+                                           @foreach($listSpecialty as $specialty)
+                                            <option value="{{$specialty->id}}">{{$specialty->name}}</option>  
+                                             
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="mt-4">

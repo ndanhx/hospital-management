@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Doctor;
+use App\Models\Specialty;
 
 class AdminController extends Controller
 {
     public function addview(){
-        
-        return view('admin.doctor.add_doctor');
+        $listSpecialty = Specialty::all();
+        return view('admin.doctor.add_doctor',compact('listSpecialty'));
     }
 
     public function upload(Request $request){
@@ -21,7 +22,8 @@ class AdminController extends Controller
         $doctor ->image = $imagename;
         $doctor ->name = $request->name;
         $doctor ->room = $request->room;
-        $doctor ->specialty = $request->specialty;
+        $doctor ->phone = $request->phone; 
+        $doctor ->specialty_id = $request->specialty;
         $doctor ->save();
 
         
@@ -30,8 +32,12 @@ class AdminController extends Controller
 
     }
     public function index( ){
+
         $listDoctor = Doctor::all();  
-        return view('admin.doctor.doctor', compact('listDoctor'));
+        $listSpecialty = Specialty::all();  
+
+
+        return view('admin.doctor.doctor', compact('listDoctor','listSpecialty'));
     
     }
 }

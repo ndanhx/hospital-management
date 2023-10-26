@@ -6,9 +6,7 @@ use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AdminController;
 
-Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/home', [HomeController::class, 'redirect']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -19,9 +17,16 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/home', [HomeController::class, 'redirect']);
+
 Route::get('/add-doctor', [AdminController::class, 'addview']);
 
 Route::post('/upload-doctor', [AdminController::class, 'upload']);
 
 Route::get('/doctor', [AdminController::class, 'index']);
+
+
+
 

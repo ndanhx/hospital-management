@@ -15,12 +15,7 @@
         <!-- partial -->
        
         <div class="main-panel">
-            <div class="content-wrapper">
-           
-            
-            
-            
-                       
+            <div class="content-wrapper">c
                         <div class="row">
                           <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
@@ -50,12 +45,7 @@
                                         <td><img src="doctorimage/{{$doctor->image}}" alt=""></td>
                                         <td>{{$doctor->name}}</td>
                                         <td>{{$doctor->phone}}</td>
-                                        @foreach ($listSpecialty as $specialty)
-                                          @if ($specialty->id == $doctor->specialty_id)
-                                            <td >{{$specialty->name}}</td>
-                                          @endif
-                                          
-                                        @endforeach
+                                        <td>{{$doctor->specialty}}</td>
                                         <td>{{$doctor->room}}</td> 
                                         <td><label class="badge badge-danger">Pending</label></td>
                                       </tr>
