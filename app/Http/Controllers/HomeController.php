@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,8 @@ class HomeController extends Controller
         {
             if(Auth::user()->usertype=='0'){
                 $listDoctor = Doctor::all(); 
-                return view('user.home', compact('listDoctor')); 
+                $listSpecialty = Specialty::all();
+                return view('user.home', compact('listDoctor','listSpecialty')); 
             }
             else
             {
@@ -32,7 +34,8 @@ class HomeController extends Controller
 
     public function index(){
         $listDoctor = Doctor::all();
+        $listSpecialty = Specialty::all();
 
-        return view('user.home', compact('listDoctor'));
+        return view('user.home', compact('listDoctor','listSpecialty'));
     }
 }

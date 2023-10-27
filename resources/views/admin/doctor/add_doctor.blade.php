@@ -56,6 +56,22 @@
                                         style="background-color: #333; color: white; border: 1px solid #555; padding: 0.5rem;"/>
                                     </div>
                                     <div class="mt-4">
+                                      <x-label for="email"  value="{{ __('email') }}" style="
+                                      color: white;
+                                  "/>
+                                      <x-input id="email" class="block mt-1" type='email' name="email" 
+                                      placeholder="Nhập số điện thoại" required autocomplete="email" style="color:black;"
+                                      style="background-color: #333; color: white; border: 1px solid #555; padding: 0.5rem;"/>
+                                  </div>
+                                  <div class="mt-4">
+                                    <x-label for="password"  value="{{ __('password') }}" style="
+                                    color: white;
+                                "/>
+                                    <x-input id="password" class="block mt-1" type="password" name="password"  
+                                    placeholder="Nhập số điện thoại" required autocomplete="Phone" style="color:black;"
+                                    style="background-color: #333; color: white; border: 1px solid #555; padding: 0.5rem;"/>
+                                </div>
+                                    <div class="mt-4">
                                         <x-label for="Specialty" value="{{ __('Speciality') }}" style="
                                         color: white;
                                     "/> 

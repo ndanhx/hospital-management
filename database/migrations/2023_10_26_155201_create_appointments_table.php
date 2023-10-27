@@ -15,13 +15,22 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->string('name');  
+            $table->string('email');  
+            $table->string('phone');  
            
-            
+            $table->text('message'); 
+             $table->string('status');  
+            $table->unsignedInteger('specialty_id');
+            $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+           $table->date('date_request');
             $table->timestamps();
         });
     }
 
-    /** 
+    /**
      * Reverse the migrations.
      *
      * @return void

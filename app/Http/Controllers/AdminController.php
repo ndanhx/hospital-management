@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Doctor;
 use App\Models\Specialty;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,7 @@ class AdminController extends Controller
     }
 
     public function upload(Request $request){
-        $doctor = new doctor;
+        $doctor = new Doctor;
         $image = $request->file;
         $imagename = time().'.'.$image->getClientOriginalExtension();
         $request ->file-> move('doctorimage', $imagename);
@@ -24,9 +25,11 @@ class AdminController extends Controller
         $doctor ->room = $request->room;
         $doctor ->phone = $request->phone; 
         $doctor ->specialty_id = $request->specialty;
-        $doctor ->save();
+        $doctor->password = Hash::make($request->password);
 
+        $doctor->email = $request->email; 
         
+        $doctor ->save(); 
         return redirect()->back()->with('message','Doctor Added Successfully');
 
 
