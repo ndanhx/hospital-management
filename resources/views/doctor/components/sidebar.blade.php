@@ -12,7 +12,9 @@
               <span class="count bg-success"></span>
             </div>
             <div class="profile-name">
-              <h5 class="mb-0 font-weight-normal">{{ Auth::guard('doctor')->user()->name }}</h5>
+              
+                  <h5 class="mb-0 font-weight-normal">{{ Auth::guard('doctor')->user()->name }}</h5>
+              
               <span>Gold Member</span>
             </div>
           </div>

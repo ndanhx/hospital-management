@@ -39,6 +39,8 @@ class DoctorController extends Controller
         $listAppointment = Appointment::all();
         return view('doctor.appointment.index',compact('listAppointment'));
     }
+
+    
     
     
 }

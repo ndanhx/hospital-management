@@ -43,4 +43,40 @@ class AdminController extends Controller
         return view('admin.doctor.doctor', compact('listDoctor','listSpecialty'));
     
     }
+
+
+    public function editDoctor($id) {
+        $doctor = Doctor::find($id);
+
+        if ($doctor) {
+            return view('admin.doctor.update_doctor', compact('doctor'));
+        }
+
+        return redirect()->back()->with('message', 'Doctor not found');
+    }
+
+   
+
+
+    public function update(Request $request, $id){
+        $doctor = Doctor::find($id);
+    
+        if ($doctor) {
+            if ($request->hasFile('file')) {
+                $image = $request->file;
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $request->file->move('doctorimage', $imageName);
+                $doctor->image = $imageName;
+            }
+    
+            $doctor->name = $request->name;
+            $doctor->room = $request->room;
+            $doctor->specialty = $request->specialty;
+            $doctor->save();
+    
+            return redirect()->back()->with('message', 'Doctor Updated Successfully');
+        }
+    
+        return redirect()->back()->with('message', 'Doctor not found');
+    }
 }

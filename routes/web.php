@@ -20,16 +20,25 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');;
 
 Route::get('/home', [HomeController::class, 'redirect']);
+
+// doctor of admin
+
 
 Route::get('/add-doctor', [AdminController::class, 'addview']);
 
 Route::post('/upload-doctor', [AdminController::class, 'upload']);
+// Route::get('/edit-doctor', [AdminController::class, 'editDoctor'])->name('edit-doctor');    
 
 
+Route::get('/edit-doctor/{id}', [AdminController::class, 'editDoctor'])->name('edit-doctor');
 
+Route::post('/update-doctor/{id}', [AdminController::class, 'update'])->name('update-doctor');
+
+
+    // role doctor
 Route::get('/doctor', [AdminController::class, 'index']);
 
 Route::get('/doctor/appointment', [DoctorController::class, 'routeDoctor']);
