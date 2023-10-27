@@ -15,41 +15,59 @@
         <!-- partial -->
        
         <div class="main-panel">
-            <div class="content-wrapper">c
+            <div class="content-wrapper">
                         <div class="row">
                           <div class="col-lg-12 grid-margin stretch-card">
                             <div class="card">
                               <div class="card-body">
-                                <a href="{{ url('add-doctor') }}" class="btn btn-primary">Add doctor</a>
-
-
-                                </p>
-                                <div class="table-responsive">
+                                <a href="{{ url('add-doctor') }}" class="btn btn-primary">Add doctor</a> 
+                              <div class="table-responsive">
                                   <table class="table">
                                     <thead>
                                       <tr>
-                                        <th>Preview</th>
                                         <th>Name</th>
+                                        <th>email</th>
                                         <th>Phone</th>
                                         <th>Specialty</th>
-                                        <th>Room</th>  
                                         <th>Process</th>  
                                         <th>Action</th>  
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        @foreach ($listDoctor as $doctor)
+                                       
+                                        @foreach ( $listAppointment as $appointment)
+                                      
                                             
                                         
-                                        <td><img src="doctorimage/{{$doctor->image}}" alt=""></td>
-                                        <td>{{$doctor->name}}</td>
-                                        <td>{{$doctor->phone}}</td>
-                                        <td>{{$doctor->specialty}}</td>
-                                        <td>{{$doctor->room}}</td> 
-                                        <td><label class="badge badge-danger">Pending</label></td>
+                                         
+                                        <td>{{$appointment->name}}</td>
+                                        <td>{{$appointment->email}}</td>
+                                        <td>{{$appointment->phone}}</td>
+                                        @foreach ($listSpecialty as $specialty)
+                                          @if ($specialty->id == $appointment->specialty_id)
+                                            <td >{{$specialty->name}}</td>
+                                          @endif
+                                          
+                                        @endforeach
+                                        <td>
+                                          @if($appointment->status =='pending')
+                                          <label class="badge badge-danger">Pending</label>
+                                          @endif
+                                          @if($appointment->status =='approved')
+                                          <label class="badge badge-danger">approved</label>
+                                          @endif
+                                          @if($appointment->status =='cancel')
+                                          <label class="badge badge-danger">cancel</label>
+                                          @endif
+                                          
+                                        <td></td>
                                       </tr>
+                                    
                                       @endforeach
+                                        
+                                            
+                                        
+                                         
                                       
                                     </tbody>
                                   </table>

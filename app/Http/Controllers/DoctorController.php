@@ -17,28 +17,26 @@ class DoctorController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
         $email = $request->input('email');
         $password = $request->input('password');
-    
         $doctor = Doctor::where('email', $email)->first();
-    
         if ($doctor && Hash::check($password, $doctor->password)) {
             Auth::guard('doctor')->login($doctor);  
-            $authenticatedDoctor = Auth::guard('doctor')->user();  
-            $listSpecialty  = Specialty::all();
-            $listAppointment = Appointment::all();
-            return view('doctor.appointment.index',compact('listAppointment','listSpecialty'));
+           
+            return redirect('/doctor-appointment');
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
     }
-
+    
 
     public function appointmentByDoctor(){
+        $authenticatedDoctor = Auth::guard('doctor')->user();  
+        $listSpecialty  = Specialty::all();
         $listAppointment = Appointment::all();
-        return view('doctor.appointment.index',compact('listAppointment'));
+        return view('doctor.appointment.index',compact('listAppointment','listSpecialty'));
     }
+    
 
     
     

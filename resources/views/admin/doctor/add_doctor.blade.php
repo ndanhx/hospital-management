@@ -20,16 +20,17 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Add Doctor</h4>
-                      <div class="row"> 
-                        @if(session()->has('message'))
-                            <div class="alert alert-success">
-                                <button type="button" class="close" data-dismiss="alert">
-                                    X
-                                </button>
-                                {{session()->get('message')}}
+                      @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        @endif 
+                        @endif
+                      <h4 class="card-title">Add Doctor</h4>
+                      <div class="row">  
                         <form action="{{ url('upload-doctor') }}" method="POST" enctype="multipart/form-data">
                           @csrf 
                           @method('POST')

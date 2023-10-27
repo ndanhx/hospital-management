@@ -69,7 +69,7 @@ return [
             'model' => App\Models\User::class,
         ],
         'doctors' => [
-            'driver' => 'eloquent',
+            'driver' => 'eloquent', 
             'model' => App\Models\Doctor::class,
         ],
 
