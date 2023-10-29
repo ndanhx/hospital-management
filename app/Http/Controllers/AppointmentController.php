@@ -35,23 +35,32 @@ class AppointmentController extends Controller
     function viewAppointment()
     {
         $listSpecialty = Specialty::all();
-        $listAppointment = Appointment::all();
+        $listAppointment = Appointment::all()->orderBy('date_request', 'asc');
         return view('admin.appointment.appointment', compact('listAppointment','listSpecialty'));
     }
     
     public function updateStatus($id)
-    {
-        
-
+    { 
         $appointment = Appointment::find($id);
         if ($appointment && $appointment->status === 'pending') {
             $appointment->status = 'approved';
-            $appointment->save();
+            $appointment->doctor_id =  Auth::guard('doctor')->user()->id;
+           $appointment->save();
 
-            return redirect()->back()->with('success', 'Trạng thái cuộc hẹn đã được cập nhật thành công.');
+           return redirect()->back()->with('message', 'Trạng thái cuộc hẹn đã được cập nhật thành công.');
+       
         } else {
             return redirect()->back()->with('error', 'Không thể cập nhật trạng thái cuộc hẹn.');
         }
+    }
+
+    function cancelStatus(Request $request){
+        $appointment_id =  $request->input('appointment_id'); 
+        $appointment = Appointment::find($appointment_id);
+        $appointment->status = 'cancel'; 
+        $appointment->save();
+        return redirect()->back()->with('message', 'Trạng thái cuộc hẹn đã được cập nhật thành công.');
+
     }
     
 }

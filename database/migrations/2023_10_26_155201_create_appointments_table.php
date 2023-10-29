@@ -17,15 +17,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');  
             $table->string('email');  
-            $table->string('phone');  
-           
+            $table->string('phone');   
             $table->text('message'); 
              $table->string('status');  
             $table->unsignedInteger('specialty_id');
             $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-           $table->date('date_request');
+            $table->date('date_request');
+            $table->unsignedInteger('doctor_id')->nullable(true)->default(null);
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->integer('VIP')->nullable(true)->default(0);
             $table->timestamps();
         });
     }

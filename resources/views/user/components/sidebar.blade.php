@@ -14,9 +14,8 @@
                     </div>
                     <div class="profile-name">
 
-                        <h5 class="mb-0 font-weight-normal">{{ Auth::guard('doctor')->user()->name }}</h5>
-
-                        <span>Gold Member</span>
+                        <h5 class="mb-0 font-weight-normal">{{ Auth::user()->name }}</h5>
+                        <span>Member</span>
                     </div>
                 </div>
                 <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i
@@ -65,25 +64,18 @@
 
 
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ url('doctor-appointment') }}">
+            <a class="nav-link" href="{{ url('user-view-appointment') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-file-document-box"></i>
                 </span>
-                <span class="menu-title">Request Appointment</span>
-            </a>
-        </li>
-        <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ url('/doctor-my-schedule') }}">
-                <span class="menu-icon">
-                    <i class="mdi mdi-table-large"></i>
-                </span>
-                <span class="menu-title">My Schedule</span>
+                <span class="menu-title">My Appointment</span>
             </a>
         </li>
 
 
+
         <li class="nav-item menu-items">
-            <a class="nav-link" href="{{ url('doctor-medical-history') }}">
+            <a class="nav-link" href="{{ url('user-medical-history') }}">
                 <span class="menu-icon">
                     <i class="mdi mdi-file-document-box"></i>
                 </span>

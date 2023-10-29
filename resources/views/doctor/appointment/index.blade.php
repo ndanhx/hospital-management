@@ -107,92 +107,100 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                @if (session()->has('message'))
+                                    <div class="alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            X
+                                        </button>
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
                                 <div class="table">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Create date</th>
+                                                <th>Date</th>
                                                 <th>Name</th>
                                                 <th>email</th>
                                                 <th>Phone</th>
                                                 <th>Specialty</th>
-
                                                 <th>Process</th>
+
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if (count($listAppointment) > 0)
+                                                @foreach ($listAppointment as $appointment)
+                                                    @if ($appointment->specialty_id == Auth::guard('doctor')->user()->specialty_id && $appointment->status == 'pending')
+                                                        <td>{{ $appointment->date_request }}</td>
 
-                                            @foreach ($listAppointment as $appointment)
-                                                @if ($appointment->specialty_id == Auth::guard('doctor')->user()->specialty_id && $appointment->status == 'pending')
-                                                    <td>{{ $appointment->created_at }}</td>
+                                                        <td>{{ $appointment->name }}</td>
+                                                        <td>{{ $appointment->email }}</td>
+                                                        <td>{{ $appointment->phone }}</td>
+                                                        @foreach ($listSpecialty as $specialty)
+                                                            @if ($specialty->id == $appointment->specialty_id)
+                                                                <td>{{ $specialty->name }}</td>
+                                                            @endif
+                                                        @endforeach
 
-                                                    <td>{{ $appointment->name }}</td>
-                                                    <td>{{ $appointment->email }}</td>
-                                                    <td>{{ $appointment->phone }}</td>
-                                                    @foreach ($listSpecialty as $specialty)
-                                                        @if ($specialty->id == $appointment->specialty_id)
-                                                            <td>{{ $specialty->name }}</td>
-                                                        @endif
-                                                    @endforeach
+                                                        <td>
+                                                            @if ($appointment->status == 'pending')
+                                                                <label class="badge badge-warning">Pending</label>
+                                                            @endif
+                                                            @if ($appointment->status == 'approved')
+                                                                <label class="badge badge-success">approved</label>
+                                                            @endif
+                                                            @if ($appointment->status == 'cancel')
+                                                                <label class="badge badge-danger">cancel</label>
+                                                            @endif
+                                                        </td>
 
-                                                    <td>
-                                                        @if ($appointment->status == 'pending')
-                                                            <label class="badge badge-danger">Pending</label>
-                                                        @endif
-                                                        @if ($appointment->status == 'approved')
-                                                            <label class="badge badge-danger">approved</label>
-                                                        @endif
-                                                        @if ($appointment->status == 'cancel')
-                                                            <label class="badge badge-danger">cancel</label>
-                                                        @endif
+                                                        <td>
+                                                            <div class="menu">
+                                                                <ul class="clearfix">
+                                                                    <li>
+                                                                        <a href="#"><span
+                                                                                class="mdi mdi-dots-vertical"></span></a>
+                                                                        {{-- <i class="mdi mdi-grease-pencil"></i> --}}
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <form
+                                                                                    action="{{ url('update-status-appointment', $appointment->id) }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary">Approved</button>
+                                                                                </form>
+                                                                            </li>
+                                                                            <li>
 
-
-
-
-
-
-                                                    </td>
-                                                    <td>
-                                                        <div class="menu">
-                                                            <ul class="clearfix">
-                                                                <li>
-                                                                    <a href="#"><span
-                                                                            class="mdi mdi-dots-vertical"></span></a>
-                                                                    {{-- <i class="mdi mdi-grease-pencil"></i> --}}
-                                                                    <ul class="sub-menu">
-                                                                        <li>
-                                                                            <form
-                                                                                action="{{ url('update-status-appointment', $appointment->id) }}"
-                                                                                method="post">
-                                                                                @csrf
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary">Approved</button>
-                                                                            </form>
-                                                                        </li>
-                                                                        <li>
-
-                                                                            <form
-                                                                                action="{{ url('cancel-status-appointment') }}"
-                                                                                method="post">
-                                                                                @csrf
-                                                                                <button
-                                                                                    class="btn btn-danger">Cancel</button>
-                                                                            </form>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                    </tr>
-                                                @endif
-                                            @endforeach
-
-
-
-
-
+                                                                                <form
+                                                                                    action="{{ url('cancel-status-appointment') }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    <input type="text"
+                                                                                        name="appointment_id"
+                                                                                        id="appointment_id"
+                                                                                        value="{{ $appointment->id }}"
+                                                                                        hidden>
+                                                                                    <button
+                                                                                        class="btn btn-danger">Cancel</button>
+                                                                                </form>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td>No data found</td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -208,6 +216,7 @@
     </div>
     @include('admin.script');
     <!-- End custom js for this page -->
+
 </body>
 
 </html>
