@@ -116,6 +116,12 @@ class DoctorController extends Controller
         return view('doctor.appointment.my_schedule', compact('listAppointment', 'listSpecialty'));
     }
     
+
+    public function getDoctorsBySpecialty($specialtyId)  {
+        $doctors = Doctor::where('specialty_id', $specialtyId)->get();
+        return response()->json($doctors)->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+
+    }
     
     
     

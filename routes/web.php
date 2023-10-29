@@ -39,6 +39,7 @@ Route::middleware([
     Route::get('/user-heath-book-detail/{id}', [UserController::class, 'HeathBookDetailUser']);
 
    
+    Route::get('/user-view-appointment2', [UserController::class, 'appointmentByUserVIP']);
   
     
     
@@ -78,6 +79,13 @@ Route::get('/doctor-heath-book-detail/{id}', [DoctorController::class, 'HeathBoo
 Route::post('/doctor-search-appointment', [DoctorController::class, 'search']);
 Route::post('/doctor-search-date', [DoctorController::class, 'searchDateDoctor']);
 
+
+//select doctor by user vip
+Route::get('/get-doctors-by-specialty/{specialtyId}', [DoctorController::class, 'getDoctorsBySpecialty']);
+
+
+
+
  
 
 
@@ -86,5 +94,7 @@ Route::post('/request-appointment', [AppointmentController::class, 'request']);
 Route::get('/view-appointment', [AppointmentController::class, 'viewAppointment']);
 Route::post('/update-status-appointment/{id}', [AppointmentController::class,'updateStatus'])->name('update-appointment');
 Route::post('/cancel-status-appointment', [AppointmentController::class,'cancelStatus']);
+
+Route::post('/request-appointment-VIP', [AppointmentController::class, 'requestVIP']);
 
 

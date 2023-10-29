@@ -20,6 +20,39 @@
     <link rel="stylesheet" href="../assets/vendor/animate/animate.css">
 
     <link rel="stylesheet" href="../assets/css/theme.css">
+    <style>
+        /* CSS */
+        .tab {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .tab button {
+            background-color: #f1f1f1;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 
 <body>

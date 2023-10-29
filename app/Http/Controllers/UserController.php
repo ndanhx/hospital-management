@@ -43,4 +43,21 @@ class UserController extends Controller
         return view('user.heath_book.heath_book_detail',compact('user','listPrescriptions','heathBook'));
 
     }
+
+    function  appointmentByUserVIP(Request $request){
+        $appointment = new Appointment;
+        $appointment->user_id = Auth::id();  
+        $appointment->name = Auth::user()->name;
+        $appointment->email = Auth::user()->email;
+        $appointment->date_request = $request->input('date_request');
+        $appointment->specialty_id = $request->input('specialty_id');
+        $appointment->phone = $request->input('phone');
+        $appointment->message = $request->input('message');
+        $appointment->VIP = 1;
+        $appointment->status =  'approved';
+        $appointment->doctor_id =   $request->input('doctor_id');
+        $appointment->save(); 
+        return redirect('user-view-appointment');
+
+    }
 }

@@ -5,6 +5,25 @@
     @include('doctor.components.css');
 </head>
 <style>
+    @keyframes blink {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .blink {
+        animation: blink 1s infinite;
+        /* 1s là thời gian mỗi chu kỳ blink */
+    }
+
     menu {
         width: 50px;
         margin: 0px auto;
@@ -154,7 +173,15 @@
                                                 @foreach ($listAppointment as $appointment)
                                                     <td>{{ $appointment->date_request }}</td>
 
-                                                    <td>{{ $appointment->name }}</td>
+                                                    @if ($appointment->VIP == 1)
+                                                        <td class="blink">
+                                                            {{ $appointment->name }}
+                                                            <i style="color: greenyellow;"
+                                                                class="mdi mdi-checkbox-marked-circle"></i>
+                                                        </td>
+                                                    @else
+                                                        <td>{{ $appointment->name }}</td>
+                                                    @endif
                                                     <td>{{ $appointment->email }}</td>
                                                     <td>{{ $appointment->phone }}</td>
                                                     @foreach ($listSpecialty as $specialty)
