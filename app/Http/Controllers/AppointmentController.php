@@ -91,7 +91,7 @@ class AppointmentController extends Controller
         $vnp_OrderType = 'Book Heath Care';
         $vnp_Amount =  $amount * 100;
         $vnp_Locale = 'VN';
-        $vnp_BankCode = 'NCB';
+        $vnp_BankCode = '';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
          
         $inputData = array(
@@ -109,12 +109,12 @@ class AppointmentController extends Controller
             "vnp_TxnRef" => $vnp_TxnRef 
         );
         
-        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-            $inputData['vnp_BankCode'] = $vnp_BankCode;
-        }
-        if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
-            $inputData['vnp_Bill_State'] = $vnp_Bill_State;
-        }
+        // if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+        //     $inputData['vnp_BankCode'] = $vnp_BankCode;
+        // }
+        // if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+        //     $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+        // }
         
         //var_dump($inputData);
         ksort($inputData);
