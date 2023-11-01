@@ -32,10 +32,21 @@ class AppointmentController extends Controller
 
     }
 
-    function viewAppointment()
+    function viewAppointment() //by admin
     {
         $listSpecialty = Specialty::all();
-        $listAppointment = Appointment::all()->orderBy('date_request', 'asc');
+
+        $today = now()->toDateString();
+        $appointmentsToUpdate = Appointment::where('status', 'pending')
+                                    ->where('date_request', '<', $today)
+                                    ->get();
+    
+        foreach ($appointmentsToUpdate as $appointment) {
+            $appointment->status = 'cancel';  
+            $appointment->save();
+        }
+
+        $listAppointment = Appointment::orderBy('id', 'desc')->paginate(5);
         return view('admin.appointment.appointment', compact('listAppointment','listSpecialty'));
     }
     

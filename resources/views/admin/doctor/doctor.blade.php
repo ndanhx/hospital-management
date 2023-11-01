@@ -133,53 +133,52 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                @foreach ($listDoctor as $doctor)
-                                                    <td><img src="doctorimage/{{ $doctor->image }}" alt=""></td>
-                                                    <td>{{ $doctor->name }}</td>
-                                                    <td>{{ $doctor->phone }}</td>
-                                                    @foreach ($listSpecialty as $specialty)
-                                                        @if ($specialty->id == $doctor->specialty_id)
-                                                            <td>{{ $specialty->name }}</td>
-                                                        @endif
-                                                    @endforeach
-                                                    <td>{{ $doctor->room }}</td>
-                                                    {{-- <td><label class="badge badge-danger">Pending</label></td> --}}
-                                                    <td>
+                                            @foreach ($listDoctor as $doctor)
+                                                <tr>
+                                                    
+                                                        <td><img src="doctorimage/{{ $doctor->image }}" alt=""></td>
+                                                        <td>{{ $doctor->name }}</td>
+                                                        <td>{{ $doctor->phone }}</td>
+                                                        @foreach ($listSpecialty as $specialty)
+                                                            @if ($specialty->id == $doctor->specialty_id)
+                                                                <td>{{ $specialty->name }}</td>
+                                                            @endif
+                                                        @endforeach
+                                                        <td>{{ $doctor->room }}</td>
+                                                        {{-- <td><label class="badge badge-danger">Pending</label></td> --}}
+                                                        <td>
 
-                                                        <div class="menu">
-                                                            <ul class="clearfix">
-                                                                <li>
-                                                                    <a href="#"><span
-                                                                            class="mdi mdi-dots-vertical"></span></a>
-                                                                    {{-- <i class="mdi mdi-grease-pencil"></i> --}}
-                                                                    <ul class="sub-menu">
-                                                                        <li><a class="btn btn-info"
-                                                                                href="{{ url('edit-doctor/' . $doctor->id) }}">
-                                                                                edit </a></li>
-                                                                        <li>
+                                                            <div class="menu">
+                                                                <ul class="clearfix">
+                                                                    <li>
+                                                                        <a href="#"><span
+                                                                                class="mdi mdi-dots-vertical"></span></a>
+                                                                        {{-- <i class="mdi mdi-grease-pencil"></i> --}}
+                                                                        <ul class="sub-menu">
+                                                                            <li><a class="btn btn-info"
+                                                                                    href="{{ url('edit-doctor/' . $doctor->id) }}">
+                                                                                    edit </a></li>
+                                                                            <li>
 
-                                                                            <form
-                                                                                action="{{ url('/delete-doctor' . '/' . $doctor->id) }}"
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit"
-                                                                                    class="btn btn-danger">delete</button>
+                                                                                <form
+                                                                                    action="{{ url('/delete-doctor' . '/' . $doctor->id) }}"
+                                                                                    method="POST">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-danger">delete</button>
 
-                                                                            </form>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                                                </form>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
 
-                                                        {{-- <form action="view-doctor" method="GET">
-                                  <button  class="btn btn-danger" type="submit">  <i class="mdi mdi-delete-forever"></i></button>
-                                </form> --}}
+                                                        
 
-                                                    </td>
-                                            </tr>
+                                                        </td>
+                                                </tr>
                                             @endforeach
 
                                         </tbody>

@@ -105,6 +105,14 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
+                                @if (session()->has('message'))
+                                <div class="alert alert-success">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        X
+                                    </button>
+                                    {{ session()->get('message') }}
+                                </div>
+                            @endif
                                 <div class="table">
                                     <table class="table">
                                         <thead>

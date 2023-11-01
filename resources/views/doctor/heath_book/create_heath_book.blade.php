@@ -143,10 +143,10 @@
                                                     <select class="form-control charging-amount" id="price"
                                                         name="time[]" data-row="1" required>
                                                         <option name="">--- Select time ---</option>
-                                                        <option value="sang" data-index="0">Morning</option>
-                                                        <option value="trua" data-index="1">Noon</option>
-                                                        <option value="chieu" data-index="1">Afternoon</option>
-                                                        <option value="toi" data-index="1">Evening</option>
+                                                        <option value="Morning" data-index="0">Morning</option>
+                                                        <option value="Noon" data-index="1">Noon</option>
+                                                        <option value="Afternoon" data-index="1">Afternoon</option>
+                                                        <option value="Evening" data-index="1">Evening</option>
                                                     </select>
                                                     <br>
                                                 </div>

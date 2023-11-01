@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
                         <select name="specialty_id" id="specialty_id" class="custom-select" required
-                            onchange="loadDoctors()">
+                            onchange="loadDoctors(this)">
                             <option>--Select Specialty--</option>
                             @foreach ($listSpecialty as $specialty)
                                 <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
@@ -157,7 +157,6 @@
 </div>
 
 <script>
-    // Mặc định hiển thị tab "Normal"
     document.getElementById("normal").style.display = "block";
     document.getElementById("vip").style.display = "none";
 
@@ -177,33 +176,13 @@
 </script>
 
 <script>
-    function loadDoctors() {
-        // var specialtyId = document.getElementById("specialty_id").value;
-        // $.ajax({
-        //     url: '/get-doctors-by-specialty/' + specialtyId,
-        //     type: 'GET',
-        //     success: function(data) {
-        //         var doctorList = document.getElementById("doctor-list");
-        //         doctorList.innerHTML = "";
-        //         data.forEach(function(doctor) {
-        //             var option = document.createElement("option");
-        //             option.value = doctor.id;
-        //             option.text = doctor.name;
-        //             doctorList.appendChild(option);
-        //         });
-        //     },
-        //     error: function(error) {
-        //         console.log(error);
-        //     }
-        // });
-
-
-        var specialtyId = document.getElementById("specialty_id").value;
-
+    function loadDoctors(specialtyIdvalue) { 
+        let specialtyId = specialtyIdvalue.value;
+        console.log(specialtyId)
         $.ajax({
             url: '/get-doctors-by-specialty/' + specialtyId,
             type: 'GET',
-            cache: false, // Ngăn chặn cache dữ liệu trên trình duyệt
+            cache: false,  
             success: function(data) {
                 var doctorList = document.getElementById("doctor-list");
                 doctorList.innerHTML = "";
@@ -220,6 +199,7 @@
                 console.log(error);
             }
         });
+        specialtyId ='';
 
     }
 </script>

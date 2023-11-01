@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Doctor;
 use App\Models\HeathBook;
 use App\Models\Prescription;
 use App\Models\Specialty;
@@ -15,7 +16,22 @@ class UserController extends Controller
     //
     
     public function appointmentByUser(){
+
+
+        $today = now()->toDateString();
+        $appointmentsToUpdate = Appointment::where('status', 'pending')
+                                    ->where('date_request', '<', $today)
+                                    ->get();
+    
+        foreach ($appointmentsToUpdate as $appointment) {
+            $appointment->status = 'cancel';  
+            $appointment->save();
+        }
+
         $user_id = Auth::user()->id;  
+        
+
+
         $listSpecialty  = Specialty::all();
         $listAppointment  = Appointment::where('user_id',$user_id )
                                 ->orderBy('date_request', 'desc')
@@ -36,11 +52,12 @@ class UserController extends Controller
 
     function HeathBookDetailUser($id){
         $heathBook  = HeathBook::find($id); 
+        $doctor = Doctor::where('id',$heathBook->doctor_id)->get();
 
         $user = User::find($heathBook->user_id);
         $listPrescriptions = Prescription::where('heath_book_id',$heathBook->id) ->get();
      
-        return view('user.heath_book.heath_book_detail',compact('user','listPrescriptions','heathBook'));
+        return view('user.heath_book.heath_book_detail',compact('user','listPrescriptions','heathBook','doctor'));
 
     }
 
@@ -57,7 +74,11 @@ class UserController extends Controller
         $appointment->status =  'approved';
         $appointment->doctor_id =   $request->input('doctor_id');
         $appointment->save(); 
-        return redirect('user-view-appointment');
+        return redirect('user-view-appointment')->with('message', 'You have successfully made a payment of 100,000 VND, and your appointment booking has been accepted'); 
 
     }
+
+
+
+   
 }

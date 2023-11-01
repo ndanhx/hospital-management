@@ -56,6 +56,11 @@
 </head>
 
 <body>
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
 
     <!-- Back to top button -->
     <div class="back-to-top"></div>
@@ -120,10 +125,17 @@
 
                         @if (Route::has('login'))
                             @auth
+                                @if (Auth::user()->usertype == 1)
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('view-doctor') }}">Dashboard</a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('user-view-appointment') }}">Dashboard</a>
+                                    </li>
+                                @endif
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('user-view-appointment') }}">Dashboard</a>
-                                </li>
+
 
                                 <li class="nav-item">
 

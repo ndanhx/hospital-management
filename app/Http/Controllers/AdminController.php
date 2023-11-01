@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Doctor;
 use App\Models\Specialty;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -103,6 +104,49 @@ class AdminController extends Controller
 
         return redirect()->route('view-doctor')->with('success', 'Doctor deleted successfully.');
     }
- 
+
+
+    //USER
+    function getAllUser(){
+        $listUser = User::all();
+        return view('admin.user.user',compact('listUser'));
+    }
+
+    public function addUser() {  
+        return view('admin.user.add_user');
+    }
+    
+
+
+    public function insertUser(Request $request) {  
+        $user = new User();
+         
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->created_at = $request->created_at;
+        $user->address = $request->address;
+        $user->usertype = $request->role;
+
+        $user->password = Hash::make($request->password);
+        $user->save(); 
+    
+        return redirect('view-user')->with('message', 'User Added Successfully'); 
+    } 
+
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        $user->delete();
+
+        return redirect('view-user') ->with('success', 'User deleted successfully.');
+    }
+
 
 }

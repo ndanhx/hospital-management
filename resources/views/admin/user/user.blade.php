@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    @include('doctor.components.css');
-</head>
-<style>
+    @include('admin.css');
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> --}}
+    <style>
     menu {
         width: 50px;
         margin: 0px auto;
@@ -88,16 +90,17 @@
     .sub-menu .current-item a {
         background: black;
     }
-</style>
+    </style>
+</head>
 
 <body>
     <div class="container-scroller">
 
         <!-- partial:partials/_sidebar.html -->
-        @include('doctor.components.sidebar');
+        @include('admin.sidebar');
         <!-- partial -->
 
-        @include('doctor.components.navbar');
+        @include('admin.navbar');
 
         <!-- partial -->
 
@@ -114,39 +117,61 @@
                                     </button>
                                     {{ session()->get('message') }}
                                 </div>
-                            @endif
+                                @endif
+                                <a href="{{ url('admin-add-user') }}" class="btn btn-primary">Add User</a>
+                                <br>
+                                <br>
+                                <hr>
                                 <div class="table">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Patient</th>
-                                                <th>Diagnosis</th>
+                                                <th>Email</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Active</th>
+                                                <th>Role</th>
+
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (count($listMedicalHistory) > 0)
+                                            @foreach ($listUser as $user)
+                                            <tr>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->phone }}</td>
+                                                <td><label class="badge badge-success">active</label></td>
+                                                @if($user->usertype==1)
+                                                <td style="color: rgb(252, 252, 252)">admin</td>
+                                                @else
+                                                <td>customer</td>
+                                                @endif
 
-                                                @foreach ($listMedicalHistory as $heathBook)
-                                                    <td>{{ $heathBook->created_at }}</td>
-                                                    @foreach ($listUser as $user)
-                                                        @if ($user->id == $heathBook->user_id)
-                                                            <td>{{ $user->name }}</td>
-                                                        @endif
-                                                    @endforeach
-                                                    <td>{{ $heathBook->diagnosis }}</td>
-                                                    <td>
-                                                        <a class="btn btn-info"
-                                                            href="{{ url('doctor-heath-book-detail/' . $heathBook->id) }}">Detail</a>
-                                                    </td>
-                                                    </tr>
-                                                @endforeach
-                                            @else
-                                                <tr>
-                                                    <td colspan="7">No data found</td>
-                                                </tr>
-                                            @endif
+                                                <td>
+
+                                                    @if($user->usertype!=1)
+
+
+                                                    <form
+                                                                            action="{{ url('/admin-delete-user' . '/' . $user->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">delete</button>
+
+                                                                        </form>
+                                                    @endif
+
+
+
+
+                                                </td>
+
+                                            </tr>
+                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -160,7 +185,8 @@
         </div>
     </div>
     </div>
-    @include('doctor.components.script');
+
+    @include('admin.script');
     <!-- End custom js for this page -->
 </body>
 

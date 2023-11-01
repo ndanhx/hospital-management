@@ -40,14 +40,16 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-
+                                <a  class="btn btn-primary" style="  float: right; " 
+                                href="{{url('print-pdf/' . $heathBook->id)}}">Print PDF</a>
+                            <br>
                                 <p class="card-description"> Patient information </p>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Full Name</label>
                                             <div class="col-sm-9">
-                                                <label type="text" class="form-control">{{ $user->name }}</label>
+                                                <label   class="form-control">{{ $user->name }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +57,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Email</label>
                                             <div class="col-sm-9">
-                                                <label type="text" class="form-control">{{ $user->email }}</label>
+                                                <label   class="form-control">{{ $user->email }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -65,7 +67,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Phone</label>
                                             <div class="col-sm-9">
-                                                <label type="text" class="form-control">{{ $user->phone }}</label>
+                                                <label   class="form-control">{{ $user->phone }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +83,7 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Address</label>
                                             <div class="col-sm-9">
-                                                <label type="text" class="form-control">{{ $user->address }}</label>
+                                                <label  class="form-control">{{ $user->address }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -92,8 +94,17 @@
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label">Diagnosis</label>
                                             <div class="col-sm-9">
-                                                <label type="text" name="diagnosis"
+                                                <label   name="diagnosis"
                                                     class="form-control">{{ $heathBook->diagnosis }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Doctor:</label>
+                                            <div class="col-sm-9">
+                                                <label   name="diagnosis"
+                                                    class="form-control">{{ $doctor[0]->name }}</label>
                                             </div>
                                         </div>
                                     </div>

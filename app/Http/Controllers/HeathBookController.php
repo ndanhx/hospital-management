@@ -41,7 +41,7 @@ class HeathBookController extends Controller
                 'time' => $times[$i],
             ]);
         }
-        return redirect('doctor-my-schedule');
+        return redirect('doctor-medical-history')->with('message', 'Create Heath Book Successfully!'); ;
         
     }
 }
