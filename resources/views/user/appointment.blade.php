@@ -51,12 +51,12 @@
 
 
 
-<div class="tab">
+<div class="tab" id="bookview">
     <button class="tablinks" onclick="openTab(event, 'normal')">Normal</button>
     <button class="tablinks" onclick="openTab(event, 'vip')">VIP</button>
 </div>
 
-<div id="normal" class="tabcontent">
+<div id="normal" class="tabcontent" >
     <h1 class="text-center wow fadeInUp">Make an Appointment </h1>
     @if (Route::has('login'))
         @auth
@@ -111,7 +111,7 @@
 
                 <div class="row mt-5 ">
                     <div class="col-12 col-sm-6 py-2 wow fadeInLeft">
-                        <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}ssss"
+                        <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}"
                             readonly>
                     </div>
                     <div class="col-12 col-sm-6 py-2 wow fadeInRight">
@@ -133,7 +133,9 @@
                         </select>
                     </div>
                     <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-                        <select name="doctor_id" id="doctor-list" class="custom-select"></select>
+                        <select name="doctor_id" id="doctor-list" class="custom-select">
+                            <option value="">--choose doctor--</option>
+                        </select>
                     </div>
                     <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
                         <input type="text" name="phone" class="form-control" placeholder="Number.." required>

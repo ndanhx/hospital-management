@@ -9,7 +9,8 @@
 
     <meta name="copyright" content="MACode ID, https://macodeid.com/">
 
-    <title>One Health - Medical Center HTML5 Template</title>
+    <title>One Health</title>
+    <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
 
     <link rel="stylesheet" href="../assets/css/maicons.css">
 
@@ -21,6 +22,19 @@
 
     <link rel="stylesheet" href="../assets/css/theme.css">
     <style>
+
+
+
+
+        .logout-form {
+            display: none;
+        }
+
+        #user-profile:hover .logout-form {
+            display: block;
+        }
+
+
         /* CSS */
         .tab {
             display: flex;
@@ -42,15 +56,15 @@
         }
 
         .tab button.active {
-            background-color: #ccc;
+            background-color: #c2f2d9;
         }
 
         .tabcontent {
             display: none;
             padding: 20px;
             text-align: center;
-            margin-top: 20px;
-            border: 1px solid #ccc;
+           
+            
         }
     </style>
 </head>
@@ -71,9 +85,10 @@
                 <div class="row">
                     <div class="col-sm-8 text-sm">
                         <div class="site-info">
-                            <a href="#"><span class="mai-call text-primary"></span> +00 123 4455 6666</a>
+                            
+                            <a href="#"><span class="mai-call text-primary"></span> +84 868 888 548</a>
                             <span class="divider">|</span>
-                            <a href="#"><span class="mai-mail text-primary"></span> mail@example.com</a>
+                            <a href="#"><span class="mai-mail text-primary"></span> ndanhx@gmail.com</a>
                         </div>
                     </div>
                     <div class="col-sm-4 text-right text-sm">
@@ -90,6 +105,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
             <div class="container">
+                <a href=""><img style=" width: 50px; padding-right: 10px; " src="admin/assets/images/favicon.png" alt="lỗi"></a>
                 <a class="navbar-brand" href="#"><span class="text-primary">One</span>-Health</a>
 
                 <form action="#">
@@ -113,18 +129,21 @@
                             <a class="nav-link" href="">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">About Us</a>
+                            <a class="nav-link" href="#footerview">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Doctors</a>
+                            <a class="nav-link" href="#doctorview">Doctors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">News</a>
+                            <a class="nav-link" href="#news">News</a>
                         </li>
 
 
                         @if (Route::has('login'))
                             @auth
+
+                            
+
                                 @if (Auth::user()->usertype == 1)
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ url('view-doctor') }}">Dashboard</a>
@@ -137,7 +156,19 @@
 
 
 
+
                                 <li class="nav-item">
+                                    <div id="user-profile">
+                                        {{ Auth::user()->name }}
+                                        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                                            @csrf
+                                            <input class="btn btn-info" type="submit" value="Logout">
+                                        </form>
+                                    </div>
+                                </li>
+                                
+
+                                {{-- <li class="nav-item">
 
                                     <a href="{{ route('profile.show') }}"> {{ Auth::user()->name }}</a>
 
@@ -147,7 +178,7 @@
                                         <input type="submit" value="Logout">
 
                                     </form>
-                                </li>
+                                </li> --}}
                             @else
                                 <li class="nav-item">
                                     <a class="btn btn-primary ml-lg-3" href="{{ route('login') }}">Login</a>
@@ -168,7 +199,16 @@
             <div class="container text-center wow zoomIn">
                 <span class="subhead">Let's make your life happier</span>
                 <h1 class="display-4">Healthy Living</h1>
-                <a href="#" class="btn btn-primary">Let's Consult</a>
+                
+                @if (Route::has('login'))
+                @auth
+                <a href="#bookview" class="btn btn-primary">Let's Consult</a>
+                @else
+                <a href="/login" class="btn btn-primary">Login</a>
+
+                @endauth 
+                @endif
+               
             </div>
         </div>
     </div>
@@ -234,66 +274,50 @@
 
     @include('user.appointment');
 
-    <div class="page-section banner-home bg-image" style="background-image: url(../assets/img/banner-pattern.svg);">
-        <div class="container py-5 py-lg-0">
-            <div class="row align-items-center">
-                <div class="col-lg-4 wow zoomIn">
-                    <div class="img-banner d-none d-lg-block">
-                        <img src="../assets/img/mobile_app.png" alt="">
-                    </div>
-                </div>
-                <div class="col-lg-8 wow fadeInRight">
-                    <h1 class="font-weight-normal mb-3">Get easy access of all features using One Health Application
-                    </h1>
-                    <a href="#"><img src="../assets/img/google_play.svg" alt=""></a>
-                    <a href="#" class="ml-2"><img src="../assets/img/app_store.svg" alt=""></a>
-                </div>
-            </div>
-        </div>
-    </div> <!-- .banner-home -->
+    
 
-    <footer class="page-footer">
+    <footer class="page-footer" id="footerview">
         <div class="container">
             <div class="row px-md-3">
                 <div class="col-sm-6 col-lg-3 py-3">
                     <h5>Company</h5>
                     <ul class="footer-menu">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Career</a></li>
-                        <li><a href="#">Editorial Team</a></li>
-                        <li><a href="#">Protection</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">About Us</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Career</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Editorial Team</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Protection</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-lg-3 py-3">
                     <h5>More</h5>
                     <ul class="footer-menu">
-                        <li><a href="#">Terms & Condition</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Advertise</a></li>
-                        <li><a href="#">Join as Doctors</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Terms & Condition</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Privacy</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Advertise</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">Join as Doctors</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-lg-3 py-3">
                     <h5>Our partner</h5>
                     <ul class="footer-menu">
-                        <li><a href="#">One-Fitness</a></li>
-                        <li><a href="#">One-Drugs</a></li>
-                        <li><a href="#">One-Live</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">One-Fitness</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">One-Drugs</a></li>
+                        <li><a href="https://nguyenduyanh.netlify.app/">One-Live</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6 col-lg-3 py-3">
                     <h5>Contact</h5>
-                    <p class="footer-link mt-2">351 Willow Street Franklin, MA 02038</p>
-                    <a href="#" class="footer-link">701-573-7582</a>
-                    <a href="#" class="footer-link">healthcare@temporary.net</a>
+                    <p class="footer-link mt-2">215 Dien bien phu street, ward 15, Binh Thanh</p>
+                    <a href="https://nguyenduyanh.netlify.app/" class="footer-link">868-888-548</a>
+                    <a href="https://nguyenduyanh.netlify.app/" class="footer-link">ndanhx@gmail.com</a>
 
                     <h5 class="mt-3">Social Media</h5>
                     <div class="footer-sosmed mt-3">
-                        <a href="#" target="_blank"><span class="mai-logo-facebook-f"></span></a>
-                        <a href="#" target="_blank"><span class="mai-logo-twitter"></span></a>
-                        <a href="#" target="_blank"><span class="mai-logo-google-plus-g"></span></a>
-                        <a href="#" target="_blank"><span class="mai-logo-instagram"></span></a>
-                        <a href="#" target="_blank"><span class="mai-logo-linkedin"></span></a>
+                        <a href="https://nguyenduyanh.netlify.app/" target="_blank"><span class="mai-logo-facebook-f"></span></a>
+                        <a href="https://nguyenduyanh.netlify.app/" target="_blank"><span class="mai-logo-twitter"></span></a>
+                        <a href="https://nguyenduyanh.netlify.app/" target="_blank"><span class="mai-logo-google-plus-g"></span></a>
+                        <a href="https://nguyenduyanh.netlify.app/" target="_blank"><span class="mai-logo-instagram"></span></a>
+                        <a href="https://nguyenduyanh.netlify.app/" target="_blank"><span class="mai-logo-linkedin"></span></a>
                     </div>
                 </div>
             </div>

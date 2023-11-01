@@ -1,4 +1,4 @@
-<div class="page-section bg-light">
+<div class="page-section bg-light" id="news">
     <div class="container">
       <h1 class="text-center wow fadeInUp">Latest News</h1>
       <div class="row mt-5">

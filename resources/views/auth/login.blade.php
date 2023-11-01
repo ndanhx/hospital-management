@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+           <img src="admin/assets/images/favicon.png" style="  width: 200px;  " alt="loi">
         </x-slot>
 
         <x-validation-errors class="mb-4" />
