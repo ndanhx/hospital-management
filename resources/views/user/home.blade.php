@@ -256,7 +256,7 @@
                             vero eos et accusam et justo duo dolores et ea rebum. Accusantium aperiam earum ipsa eius,
                             inventore nemo labore eaque porro consequatur ex aspernatur. Explicabo, excepturi
                             accusantium! Placeat voluptates esse ut optio facilis!</p>
-                        <a href="about.html" class="btn btn-primary">Learn More</a>
+                        <a href="#" class="btn btn-primary">Learn More</a>
                     </div>
                     <div class="col-lg-6 wow fadeInRight" data-wow-delay="400ms">
                         <div class="img-place custom-img-1">

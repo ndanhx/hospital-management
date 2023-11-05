@@ -73,6 +73,9 @@ Route::post('/create-heath-book', [HeathBookController::class, 'createHeathBook'
 Route::get('/doctor-medical-history', [DoctorController::class, 'medicalHistoryDoctor']);
 Route::get('/doctor-heath-book-detail/{id}', [DoctorController::class, 'HeathBookDetailDoctor']);
 Route::get('/print-pdf/{id}', [DoctorController::class, 'printPDFDoctor']);
+Route::get('/doctor-check-records', [DoctorController::class, 'getAllUserCheckRecordsDoctor']);
+Route::get('/doctor-search-user', [DoctorController::class, 'searchUserDoctor']);
+
 
 
 
@@ -80,6 +83,8 @@ Route::get('/print-pdf/{id}', [DoctorController::class, 'printPDFDoctor']);
 Route::post('/doctor-search-appointment', [DoctorController::class, 'search']);
 Route::post('/doctor-search-date', [DoctorController::class, 'searchDateDoctor']);
 Route::post('/doctor-logout', [DoctorController::class, 'logout']);
+
+
 
 
 //select doctor by user vip- ajax

@@ -146,7 +146,7 @@
                                                 <input type="date" class="form-control" name="date"
                                                     value="{{ date('Y-m-d') }}" min="{{ date('Y-m-d') }}">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Today</button>
+                                            <button type="submit" class="btn btn-primary">Search</button>
                                         </div>
                                     </form>
                                 </div>
@@ -245,7 +245,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-
+                                {{$listAppointment->links()}}
                             </div>
                         </div>
                     </div>

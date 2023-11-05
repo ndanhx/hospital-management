@@ -56,7 +56,7 @@ class DoctorController extends Controller
         $listSpecialty  = Specialty::all();
         $listAppointment  = Appointment::where('status', 'pending')
                                 ->orderBy('date_request', 'asc')
-                                ->get(); 
+                                ->paginate(5)  ;
     
         return view('doctor.appointment.index',compact('listAppointment','listSpecialty'));
     }
@@ -68,7 +68,7 @@ class DoctorController extends Controller
         $listAppointment  = Appointment::where('doctor_id', $doctorId)
                                 ->where('status', 'approved')
                                 ->orderBy('date_request', 'asc')
-                                ->get();
+                                ->paginate(5)  ;
         return view('doctor.appointment.my_schedule',compact('listAppointment','listSpecialty'));
     }
     
@@ -84,7 +84,7 @@ class DoctorController extends Controller
         $doctorId = Auth::guard('doctor')->user()->id;  
         $listMedicalHistory  = HeathBook::where('doctor_id', $doctorId)
                             ->orderBy('created_at', 'desc')
-                            ->get();
+                            ->paginate(5);
         $listUser = User::all();
         return view('doctor.heath_book.medical_history',compact('listMedicalHistory','listUser'));
     }
@@ -148,13 +148,13 @@ class DoctorController extends Controller
             $listAppointment  = Appointment::where('doctor_id', $doctorId)
             ->where('status', 'approved')
             ->orderBy('date_request', 'asc')
-            ->get();
+            ->paginate(5)  ;
         }else{ 
             $listAppointment  = Appointment::where('doctor_id', $doctorId)
             ->where('name','LIKE', "%$name%")
             ->where('status', 'approved')
             ->orderBy('date_request', 'asc')
-            ->get();           
+            ->paginate(5)  ;     
         }       
         return view('doctor.appointment.my_schedule',compact('listAppointment','listSpecialty'));
     }
@@ -170,7 +170,7 @@ class DoctorController extends Controller
                                       ->whereDate('date_request', '=', $searchDate)
                                       ->where('status', 'approved')
                                       ->orderBy('date_request', 'asc')
-                                      ->get();
+                                      ->paginate(5)  ;
     
         return view('doctor.appointment.my_schedule', compact('listAppointment', 'listSpecialty'));
     }
@@ -187,6 +187,59 @@ class DoctorController extends Controller
         return redirect('/doctor/login');
     }
     
+
+    public function getAllUserCheckRecordsDoctor(){
+        $listUser = User::where('usertype', '!=', 1)->get();
+        $listSpecialty = Specialty::all();
+        $listMedicalHistory = HeathBook::all();
+
+        return view('doctor.heath_book.check_user_records', compact('listUser','listSpecialty', 'listMedicalHistory'));
+
+    }
+
+    public function searchUserDoctor(Request $request)
+    {
+        $txtSearch = $request->input('txt');
+        $listUser = User::where('name', 'like', '%' . $txtSearch . '%')->get();
+        $listHeathBook = HeathBook::all();
+        $htmlRows = [];
+    
+        foreach ($listUser as $user) {
+            foreach ($listHeathBook as $heathBook) {
+                if ($user->id == $heathBook->user_id) {
+                    $htmlRow = '<tr>';
+                    $htmlRow .= '<td>' . $heathBook->created_at . '</td>';
+                    $htmlRow .= '<td>' . $user->name . '</td>';
+                    $htmlRow .= '<td>' . $heathBook->diagnosis . '</td>';
+                    $htmlRow .= '<td><a class="btn btn-info" href="' . url('doctor-heath-book-detail/' . $heathBook->id) . '">Detail</a></td>';
+                    $htmlRow .= '</tr>';
+    
+                    $htmlRows[] = $htmlRow;
+                }
+            }
+        }
+    
+        // Kiểm tra xem có dữ liệu không và trả về chuỗi HTML hoặc thông báo 'not data found'
+        if (count($htmlRows) > 0) {
+            $html = '<table class="table">';
+            $html .= '<thead>';
+            $html .= '<tr>';
+            $html .= '<th>Date</th>';
+            $html .= '<th>Patient</th>';
+            $html .= '<th>Diagnosis</th>';
+            $html .= '<th>Action</th>';
+            $html .= '</tr>';
+            $html .= '</thead>';
+            $html .= '<tbody>';
+            $html .= implode('', $htmlRows);
+            $html .= '</tbody>';
+            $html .= '</table>';
+        } else {
+            $html = 'not data found';
+        }
+    
+        return response()->json(['html' => $html]);
+    }
     
     
     

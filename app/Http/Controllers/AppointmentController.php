@@ -93,7 +93,7 @@ class AppointmentController extends Controller
         $amount = $request->input('amount'); 
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        
+        //URL DEPLOYED
         $vnp_Returnurl  = "https://one-heath-7b2c7f266b02.herokuapp.com/user-view-appointment2?user_id=$appointment->user_id&name=$appointment->name&email=$appointment->email&date_request=$appointment->date_request&specialty_id=$appointment->specialty_id&message=$appointment->message&status=$appointment->status&doctor_id=$appointment->doctor_id&phone=$appointment->phone";
         // $vnp_Returnurl  = "http://127.0.0.1:8000/user-view-appointment2?user_id=$appointment->user_id&name=$appointment->name&email=$appointment->email&date_request=$appointment->date_request&specialty_id=$appointment->specialty_id&message=$appointment->message&status=$appointment->status&doctor_id=$appointment->doctor_id&phone=$appointment->phone";
         $vnp_TmnCode = "81ONK5NW";//Mã website tại VNPAY 

@@ -72,21 +72,21 @@
                             readonly>
                     </div>
                     <div class="col-12 col-sm-6 py-2 wow fadeInLeft" data-wow-delay="300ms">
-                        <input type="date" class="form-control" name="date" id="datePicker" min="<?php echo date('Y-m-d'); ?>">
+                        <input type="date" class="form-control" name="date" id="datePicker" min="<?php echo date('Y-m-d'); ?>" required>
 
                     </div>
                     <div class="col-12 col-sm-6 py-2 wow fadeInRight" data-wow-delay="300ms">
-                        <select name="specialty_id" id="specialty_id" class="custom-select">
+                        <select name="specialty_id" id="specialty_id" class="custom-select" required>
                             @foreach ($listSpecialty as $specialty)
                                 <option value="{{ $specialty->id }}">{{ $specialty->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-                        <input type="text" name="phone" class="form-control" placeholder="Number..">
+                        <input type="text" name="phone" class="form-control" placeholder="Number.." required>
                     </div>
                     <div class="col-12 py-2 wow fadeInUp" data-wow-delay="300ms">
-                        <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
+                        <textarea name="message" id="message" class="form-control" rows="6" placeholder="Enter message.." required></textarea>
                     </div>
                 </div>
 

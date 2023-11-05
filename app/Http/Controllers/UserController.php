@@ -35,7 +35,7 @@ class UserController extends Controller
         $listSpecialty  = Specialty::all();
         $listAppointment  = Appointment::where('user_id',$user_id )
                                 ->orderBy('date_request', 'desc')
-                                ->get(); 
+                                ->paginate(5); 
     
         return view('user.appointment.appointment',compact('listAppointment','listSpecialty'));
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
         $user_id = Auth::user()->id;  
         $listMedicalHistory  = HeathBook::where('user_id', $user_id)
         ->orderBy('created_at', 'desc')
-        ->get();
+        ->paginate(5); 
         $listUser = User::all();
         return view('user.heath_book.medical_history',compact('listMedicalHistory','listUser'));
     }

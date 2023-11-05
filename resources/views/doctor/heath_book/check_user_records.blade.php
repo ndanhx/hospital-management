@@ -108,14 +108,53 @@
                         <div class="card">
                             <div class="card-body">
                                 @if (session()->has('message'))
-                                <div class="alert alert-success">
-                                    <button type="button" class="close" data-dismiss="alert">
-                                        X
-                                    </button>
-                                    {{ session()->get('message') }}
+                                    <div class="alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            X
+                                        </button>
+                                        {{ session()->get('message') }}
+                                    </div>
+                                @endif
+                                 <div class="row">
+                                    <form class="col-md-6" action="{{ url('doctor-search-appointment') }}"
+                                        method="POST">
+                                        @csrf
+                                        <div class="form-group row">
+                                            <div class="col-sm-9">
+                                                <input oninput="searchUser(this)" value=""  
+                                                 type="text" class="form-control" name="name"
+                                                    placeholder="Full name...">
+                                            </div>
+
+
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                                            <script>
+                                                
+                                                function searchUser(param) {
+                                                    var txtSearch = param.value;
+                                                    axios.get('/doctor-search-user', {
+                                                        params: {
+                                                            txt: txtSearch
+                                                        }
+                                                    })
+                                                    .then(function (response) {
+                                                        var row = document.getElementById("table-ne");
+                                                        row.innerHTML = response.data.html;
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error(error);
+                                                    });
+                                                }
+
+                                            </script>
+
+
+                                            <button type="submit" class="btn btn-primary" disabled>Search</button>
+                                        </div>
+                                    </form> 
+                                   
                                 </div>
-                            @endif
-                                <div class="table">
+                                <div class="table-ne" id="table-ne">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -150,7 +189,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                {{$listMedicalHistory->links()}}
+
                             </div>
                         </div>
                     </div>

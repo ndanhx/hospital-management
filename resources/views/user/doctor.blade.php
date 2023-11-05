@@ -16,7 +16,12 @@
             </div>
             <div class="body">
               <p class="text-xl mb-0">{{ $doctor->name }}</p>
-              <span class="text-sm text-grey">{{ $doctor->specialty_id }}</span>
+              @foreach($listSpecialty as $spe)
+                @if ($doctor->specialty_id == $spe->id)
+                <span class="text-sm text-grey">  {{ $spe->name }}</span>
+                @endif
+              @endforeach
+             
             </div>
           </div>
         </div>

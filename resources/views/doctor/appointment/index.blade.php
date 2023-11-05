@@ -204,7 +204,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-
+                                {{$listAppointment->links()}}
                             </div>
                         </div>
                     </div>

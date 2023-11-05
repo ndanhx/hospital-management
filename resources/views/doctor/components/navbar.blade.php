@@ -3,7 +3,7 @@
  
     <nav class="navbar p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href=""><img src="admin/assets/images/logo-mini.svg"
+            <a class="navbar-brand brand-logo-mini" href="#"><img src="admin/assets/images/logo-mini.svg"
                     alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
@@ -165,7 +165,7 @@
                 @auth('doctor')
                     <form action="{{ url('doctor-logout') }}" method="POST">
                         @csrf
-                        <button type="submit">Logout</button>
+                        <button class="btn btn-danger" type="submit">Logout</button>
                     </form>
                 @endauth
 
